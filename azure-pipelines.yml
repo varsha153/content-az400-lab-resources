@@ -37,13 +37,3 @@ trigger:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
-- stage: Deploy
-  jobs:
-  - job: Deploy
-    pool:
-      name: 'pool2'
-    steps:
-    - checkout: none
-
-    - download: current
-      artifact: drop
