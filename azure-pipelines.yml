@@ -4,9 +4,13 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
 - develop
 - feature/*
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
 
 - stage: Build
   jobs:
@@ -37,3 +41,13 @@ trigger:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+      name: 'pool2'
+    steps:
+    - checkout: none
+
+    - download: current
+      artifact: drop
